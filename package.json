@@ -1,0 +1,29 @@
+{
+  "name": "Syntax-es.js",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Analizador sintáctico castellano",
+   "license": "MIT",
+  "repository": "Softman65/Syntax-es.js",
+  "author": {
+    "name": "Ricardo Benitez",
+    "email": "rbenitez2012@gmail.com"
+  },
+  "bin": "cli.js", 
+  "engines": {
+    "node": ">=16.2.0"
+  },
+  "scripts": {},
+  "files": [
+    "index.js",
+    "cli.js"
+  ],
+  "keywords": [
+  ],
+  "dependencies": {
+    "@nlpjs/lang-es": "^4.22.0",
+    "colors": "^1.4.0",
+    "lodash": "^4.17.11",
+    "prompt": "^1.2.0",
+  }
+}
