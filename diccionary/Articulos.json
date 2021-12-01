@@ -1,0 +1,30 @@
+{
+  "rule": {
+    "determinado": { "genero": { "numero": "" } },
+    "indeterminado": { "genero": { "numero": "" } }
+  },
+  "determinado": {
+    "masculino": {
+      "singular": "el",
+      "plural": "los"
+    },
+    "femenino": {
+      "singular": "la",
+      "plural": "las"
+    },
+    "neutro": {
+      "singular":  "lo" 
+    }
+  },
+  "indeterminado": {
+    "masculino": {
+      "singular": "un",
+      "plural": "unos"
+    },
+    "femenino": {
+      "singular": "una",
+      "plural": "unas"
+    }
+
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "personales": {
+    "singular": {
+      "primera": {
+        "neutro": "yo"
+      },
+      "segunda": {
+        "neutro": "tu"
+      },
+      "tercera": {
+        "masculino": "el",
+        "femenino": "ella"
+      }
+
+    },
+    "plural": {
+      "primera": {
+        "masculino": "nosotros",
+        "femenino": "nosotras"
+      },
+      "segunda": {
+        "masculino": "vosotros",
+        "femenino": "vosotras"
+      },
+      "tercera": {
+        "masculino": "ellos",
+        "femenino": "ellas"
+      }
+    }
+  },
+  "demostrativos": {
+    "singular": {
+      "cerca": {
+        "masculino": "este",
+        "femenino": "esta",
+        "neutro": "esto"
+      },
+      "medio": {
+        "masculino": "ese",
+        "femenino": "esa",
+        "neutro": "eso"
+      },
+      "lejos": {
+        "masculino": "aquel",
+        "femenino": "aquella",
+        "neutro": "aquello"
+      }
+    },
+    "plural": {
+      "cerca": {
+        "masculino": "estos",
+        "femenino": "estas"
+      },
+      "medio": {
+        "masculino": "esos",
+        "femenino": "esas"
+      },
+      "lejos": {
+        "masculino": "aquellos",
+        "femenino": "aquellas"
+      }
+    }
+  },
+  "posesivos": {
+    "mono": {
+      "singular": {
+        "primera": {
+          "masculino": "mio",
+          "femenino": "mia"
+        },
+        "segunda": {
+          "masculino": "tuyo",
+          "femenino": "tuya"
+        },
+        "tercera": {
+          "masculino": "suyo",
+          "femenino": "suya"
+        }
+      },
+      "plural": {
+        "primera": {
+          "masculino": "mios",
+          "femenino": "mias"
+        },
+        "segunda": {
+          "masculino": "tuyos",
+          "femenino": "tuyas"
+        },
+        "tercera": {
+          "neutro": "sus"
+        }
+      }
+    },
+    "poli": {
+      "singular": {
+        "primera": {
+          "masculino": "nuestro",
+          "femenino": "nuestra"
+        },
+        "segunda": {
+          "masculino": "vuestro",
+          "femenino": "vuestra"
+        },
+        "tercera": {
+          "masculino": "suyo",
+          "femenino": "suya"
+        }
+      },
+      "plural": {
+        "primera": {
+          "masculino": "mios",
+          "femenino": "mias",
+          "neutro": "mis"
+        },
+        "segunda": {
+          "masculino": "tuyos",
+          "femenino": "tuyas",
+          "neutro": "tus"
+        },
+        "tercera": {
+          "masculino": "suyos",
+          "femenino": "suyas",
+          "neutro": "sus"
+        }
+      }
+    }
+  }
+}

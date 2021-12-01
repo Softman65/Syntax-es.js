@@ -1,0 +1,43 @@
+{
+  "coordinantes": {
+    "copulativas": [
+      "y",
+      [ "ni", "ni" ],
+      "ni",
+      [ "tan", "como" ],
+      [ "tan", "cuanto" ],
+      [ "tanto", "como" ],
+      [ "tanto", "cuanto" ],
+      [ "asi", "como" ],
+      [ "lo mismo", "que" ],
+      "no solo",
+      "sino tambien"
+    ],
+    "disyuntivas": [
+      "o",
+      [ "bien", "bien" ],
+      [ "ya", "ya" ],
+      [ "ora", "ora" ],
+      [ "sea", "sea" ],
+      [ "fuera", "fuera" ]
+    ],
+    "adversativas": [
+      "pero",
+      "mas",
+      "empero",
+      "sino",
+      "mientras",
+      "que"
+    ]
+  },
+  "subordinantes": {
+    "finales": [ "para que" ],
+    "temporales": [ "mientras", "luego que" ],
+    "causales": [ "porque", "como" ],
+    "comparativas": [ "que", "como si" ],
+    "completivas": [ "que", "como si" ],
+    "concesivas": [ "aunque", "si bien" ],
+    "condicionales": [ "si" ],
+    "ilativas": [ "luego", "conque", "asi que" ]
+  }
+}
