@@ -1,6 +1,6 @@
 {
   "name": "syntax-es.js",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": false,
   "description": "Analizador sintáctico castellano",
   "license": "MIT",
@@ -17,7 +17,7 @@
   "files": [
     "index.js",
     "prototypes/arrays.prototypes.js",
-    "prototypes/strings.prototypes.js",
+    "prototypes/string.prototypes.js",
     "diccionary/Articulos.json",
     "diccionary/Conjunciones.json",
     "diccionary/Preposiciones.json",
