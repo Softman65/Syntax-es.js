@@ -98,10 +98,12 @@ module.exports = function (lang,extendArrays) {
 
         _.each(_m, function (objWord, pos) {
             if (_.isString(objWord)) {
-                if (objWord.isNumeral()) {
-                    _m[pos] = { type: number, value: objWord.numeral() }
+                var _obj = {}
+                if (objWord.isNumeral(sintaxis.numerales)) {
+                    _obj[objWord] = { type: 'numero', value: objWord.numeral(sintaxis.numerales) }
+                    _m[pos] = _obj
                 } else {
-                    var _obj = {}
+                    
                     if (_previus(_m, pos, ["adjetivo","preposicion"])) {                        
                         _obj[objWord] = sintaxis.words().sustantivo(objWord)
                         _m[pos] = _obj
@@ -164,10 +166,13 @@ module.exports = function (lang,extendArrays) {
     String.prototype.firstLetter = function (capitalize) {
         return capitalize ? this.substr(0, 1).toUpperCase() : this.substr(0, 1).toLowerCase()
     }
-    String.prototype.isNumeral = function () {
-        return false
+    String.prototype.isNumeral = function (_numbers) {
+        const _word = this.toString()
+        return !_.isNaN(_word * 1) || _.keys(_numbers).indexOf(_word) > -1
+
     }
-    String.prototype.numeral = function () {
-        return 0
+    String.prototype.numeral = function (_numbers) {
+        const _word = this.toString()
+        return !_.isNaN(_word * 1) ? _word * 1 : _.keys(_numbers).indexOf(_word) > -1 ? _numbers[_word] : -1
     }
 }

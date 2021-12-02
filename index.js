@@ -15,12 +15,14 @@ class Sintaxis {
 
         this.lang = lang
 
+        this.numerales = JSON.parse(fs.readFileSync(path.resolve(__dirname, './diccionary/Numerales.json')))
 
         this.articulos = JSON.parse(fs.readFileSync(path.resolve(__dirname, './diccionary/Articulos.json')))
         this.pronombres = JSON.parse(fs.readFileSync(path.resolve(__dirname, './diccionary/Pronombres.json')))
         this.preposiciones = JSON.parse(fs.readFileSync(path.resolve(__dirname, './diccionary/Preposiciones.json')))
         this.conjunciones = JSON.parse(fs.readFileSync(path.resolve(__dirname, './diccionary/Conjunciones.json')))
         this.adjetivos = {}
+
         var tmpList = this.adverbios = {}
         _.each(_adverbios, function (_type,_types) {
             _.each(_type, function (_words) {
