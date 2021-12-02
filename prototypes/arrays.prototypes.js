@@ -1,4 +1,4 @@
-module.exports = function (_) {
+module.exports = function (lang, _) {
 
     const _exploraInto = function (array, _arr, _wp, _e, _p) {
         var _ret = []
@@ -49,41 +49,6 @@ module.exports = function (_) {
             vocales[w] = { vocales: _v , consonantes:_c}
         })
         return vocales
-    }
-    Array.prototype.morfologia = function (lang,sintaxis) {
-        var _m = sintaxis.words(sintaxis).conjuncion(lang, this)
-        _.each(_m, function (e, i) {
-            if (!_.isObject()) {
-                var _obj = {}
-                var map = {
-                    articulo: sintaxis.words(sintaxis).articulo(lang, e),
-                    pronombre: sintaxis.words(sintaxis).pronombre(lang, e),
-                    preposicion: sintaxis.words(sintaxis).preposicion(lang, e),
-                    adjetivos: sintaxis.words(sintaxis).adjetivo(lang, e) //,
-                    //verbo: sintaxis.words.verbo(lang, e),
-                }
-                _.each(map, function (content) {
-                    if (content && !_obj[e]) {
-                        _obj[e] = content
-                    }
-                })
-                if (_obj[e]) {
-                    _m[i] = _obj
-                } else {
-                    if (_m.length > 0) {
-                        const t = _.keys(_m[_m.length - 1])
-                        if (t.length > 0 && _m[_m.length - 1][t[0]].type == 'articulo') {
-                            _obj[e] = sintaxis.words(sintaxis).sustantivo(e)
-                            _m[i]=_obj
-                        }
-                    }
-
-                }
-            }
-
-        })
-        //debugger
-        return _m
     }
 
     Array.prototype.toMap = function (array) {

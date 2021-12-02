@@ -1,6 +1,9 @@
 {
   "personales": {
     "singular": {
+      "impersonal": {
+        "atono": "me"
+      },
       "primera": {
         "neutro": "yo"
       },

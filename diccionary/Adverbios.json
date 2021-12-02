@@ -1,0 +1,10 @@
+{
+	"lugar": [ "aquí", "allí", "ahí", "allá", "acá", "arriba", "abajo", "cerca", "lejos", "adelante", "delante", "detrás", "encima", "debajo", "enfrente", "atrás", "alrededor" ],
+	"tiempo": [ "antes", "después", "luego", "pronto", "tarde", "temprano", "todavía", "aún", "ya", "ayer", "hoy", "mañana", "anteayer", "siempre", "nunca", "jamás", "próximo", "pronto", "anoche", "enseguida", "ahora", "mientras", "anterior" ],
+	"modo": [ "bien", "mal", "regular", "despacio", "deprisa", "así", "tal", "como", "aprisa", "adrede", "peor", "mejor" ],
+	"grado": [ "muy", "poco", "mucho", "bastante", "más", "menos", "algo", "demasiado", "casi", "solo", "tan", "tanto", "todo", "nada","aproximado","bis"],
+	"afirmacion": [ "sí", "también", "cierto", "cierto", "efectivo", "claro", "exacto", "obvio", "verdadero", "seguro", "asimismo" ],
+	"negacion": [ "no", "jamás", "nunca", "tampoco" ],
+	"orden": [ "primero", "último" ],
+	"otros": [ "solo", "aún", "inclusive", "además", "único", "incluso", "mismamente", "propio", "preciso", "concreto", "viceversa", "contrario", "siquiera", "consecuente" ]
+}

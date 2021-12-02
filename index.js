@@ -1,5 +1,5 @@
 
-require('./prototypes/string.prototypes.js')(true);
+require('./prototypes/string.prototypes.js')('es',true);
 const _ = require('lodash')
 const fs = require('fs')
 const path = require('path')
@@ -9,19 +9,34 @@ class Sintaxis {
 
     constructor(lang) {
          var letras = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'X', 'Y', 'Z']
-        //const langdetect = require('langdetect');
+
+        var _adverbios = JSON.parse(fs.readFileSync(path.resolve(__dirname, './diccionary/Adverbios.json'),'latin1'))
+
 
         this.lang = lang
+
+
         this.articulos = JSON.parse(fs.readFileSync(path.resolve(__dirname, './diccionary/Articulos.json')))
         this.pronombres = JSON.parse(fs.readFileSync(path.resolve(__dirname, './diccionary/Pronombres.json')))
-        this.preposiciones = JSON.parse(fs.readFileSync(path.resolve(__dirname, './diccionary/preposiciones.json')))
-        this.conjunciones = JSON.parse(fs.readFileSync(path.resolve(__dirname, './diccionary/conjunciones.json')))
+        this.preposiciones = JSON.parse(fs.readFileSync(path.resolve(__dirname, './diccionary/Preposiciones.json')))
+        this.conjunciones = JSON.parse(fs.readFileSync(path.resolve(__dirname, './diccionary/Conjunciones.json')))
         this.adjetivos = {}
+        var tmpList = this.adverbios = {}
+        _.each(_adverbios, function (_type,_types) {
+            _.each(_type, function (_words) {
+                const _leter = _words.firstLetter(true)
+                if (!tmpList[_leter])
+                    tmpList[_leter] = {}
+
+                tmpList[_leter][_words.normalizer()] = _types
+            })
+        })
         this.verbos = {}
 
+        const _this = this
         _.each(letras, function (letra) {
             try {
-                this.adjetivos[letra] = JSON.parse(fs.readFileSync(path.resolve(__dirname, './diccionary/Adjetivos/' + letra + '.json')))
+                _this.adjetivos[letra] = JSON.parse(fs.readFileSync(path.resolve(__dirname, './diccionary/Adjetivos/' + letra + '.json')))
             } catch (err) {
 
             }
@@ -29,7 +44,7 @@ class Sintaxis {
             try {
                 const _v = JSON.parse(fs.readFileSync(path.resolve(__dirname, './diccionary/Verbos/' + letra + '.json')))
                 _.each(_v, function (verbo, word) {
-                    this.verbos[verbo.raiz] = word
+                    _this.verbos[verbo.raiz] = word
                 })
             } catch (err) {
 
@@ -38,12 +53,15 @@ class Sintaxis {
         console.log('diccionarios cargados')
     }
     analisis(text) {
-
-
+        const analizer = this
         return {
-            lang: this.lang,
-            Original: text,
-            morfologia: text.tokenize(this.lang).morfologia(this.lang, this)
+            morfologico: function (opts) {
+                return {
+                    lang: this.lang,
+                    Original: text,
+                    morfologia: text.normalizer().morfologia(analizer,opts)
+                }
+            }
 
         }
     }
@@ -51,10 +69,20 @@ class Sintaxis {
         const _this = this
         return {
             es: {
+                Adverbios: function (word) {
+                    var _k = null
+                    const letra = word.firstLetter(true)
+                    if (_this.adjetivos[letra])
+                        if (_this.adjetivos[letra][word]) {
+                            _k = { type: 'adverbio', mode: arr[1] }
+                        }
+
+                    return _k
+                },
                 Adjetivos: function (word) {
                     var _k = null
-                    if (_this.adjetivos[word.substr(0, 1).toUpperCase()])
-                        _.each(_this.adjetivos[word.substr(0, 1).toUpperCase()], function (arr) {
+                    if (_this.adjetivos[word.firstLetter(true)])
+                        _.each(_this.adjetivos[ word.firstLetter(true) ], function (arr) {
                             if (word == arr[0])
                                 _k = { type: 'adjetivo', mode: arr[1] }
                         })
@@ -121,13 +149,12 @@ class Sintaxis {
                 Verbos: function (word) {
                     if (_this.verbos[word.stem('es')] && _this.verbos[word.stem('es')]) {
                         const letra = word.substr(0, 1).toUpperCase()
-                        const verbo = JSON.parse(fs.readFileSync(path.resolve(__dirname, './diccionary/Verbos/' + letra + '.json')))[verbos[word.stem('es')]]
+                        const verbo = JSON.parse(fs.readFileSync(path.resolve(__dirname, './diccionary/Verbos/' + letra + '.json')))[_this.verbos[word.stem('es')]]
                         return word.isVerbo(verbo)
                     } else {
                         return null
                     }
                 }
-
             }
         }
     }
@@ -135,19 +162,20 @@ class Sintaxis {
         const _engine = this.engines()[this.lang]
         const _this =this
         return {
-            verbo: function (lang, word) {
+            verbo: function (word) {
                 return _engine.Verbos(word)
             },
-            adjetivo: function (lang, word) {
+            adjetivo: function (word) {
+          
                 return !_.isObject(word) ? _engine.Adjetivos(word) : null
             },
-            articulo: function (lang, word) {
+            articulo: function (word) {
                 return _engine.Articulos(word)
             },
-            sustantivo: function (lang, word) {
+            sustantivo: function (word) {
                 return { type: 'sustantivo' } //, mode: key, genero: genero, numero: numero }
             },
-            pronombre: function (lang, word) {
+            pronombre: function (word) {
                 var k = null
                 _.each(_this.pronombres, function (data, key) {
                     var _q = null
@@ -158,15 +186,17 @@ class Sintaxis {
                 })
                 return k
             },
-            preposicion: function (lang, word) {
+            preposicion: function (word) {
                 return _engine.Preposiciones(word, _this.preposiciones)
             },
-            conjuncion: function (lang, words) {
+            conjuncion: function (words) {
                 return [].toMap(_this.conjunciones).into(words, 'Conjunciones', _engine )
+            },
+            adverbio: function (word) {
+                return _engine.Adverbios(word )
             }
         }
     }
-
     back() {
         var normalizer = null;
         var tokenizer = null;

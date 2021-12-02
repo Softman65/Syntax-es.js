@@ -1,6 +1,6 @@
 {
   "name": "syntax-es.js",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "private": false,
   "description": "Analizador sintáctico castellano",
   "license": "MIT",
@@ -66,7 +66,8 @@
     "diccionary/Verbos/U.json",
     "diccionary/Verbos/V.json",
     "diccionary/Verbos/Z.json",
-    "cli.js"
+    "cli.js",
+    "test.js"
   ],
   "keywords": [
   ],
