@@ -1,5 +1,5 @@
 const semantic = require('./index.js')
 
-const _syntax = new semantic('es')
+const _syntax = new semantic()
 
-console.log(_syntax.analisis('me pones 30 docenas de churritos fritos').morfologico() )
+console.log(JSON.stringify(_syntax.analisis('Es sencillo hacer que las cosas sean complicadas, pero difícil hacer que sean sencillas.').morfologico(),null,2) )

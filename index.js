@@ -3,17 +3,17 @@ require('./prototypes/string.prototypes.js')('es',true);
 const _ = require('lodash')
 const fs = require('fs')
 const path = require('path')
-const { StemmerEs, StopwordsEs, TokenizerEs, NormalizerEs } = require('@nlpjs/lang-es');
+//const { StemmerEs, TokenizerEs, NormalizerEs } = require('@nlpjs/lang-es');
 
 class Sintaxis {
 
-    constructor(lang) {
-         var letras = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'X', 'Y', 'Z']
+    constructor(keywords) {
+        const letras = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'X', 'Y', 'Z']
 
         var _adverbios = JSON.parse(fs.readFileSync(path.resolve(__dirname, './diccionary/Adverbios.json'),'latin1'))
 
 
-        this.lang = lang
+        this.lang = 'es'
 
         this.numerales = JSON.parse(fs.readFileSync(path.resolve(__dirname, './diccionary/Numerales.json')))
 
@@ -46,7 +46,8 @@ class Sintaxis {
             try {
                 const _v = JSON.parse(fs.readFileSync(path.resolve(__dirname, './diccionary/Verbos/' + letra + '.json')))
                 _.each(_v, function (verbo, word) {
-                    _this.verbos[verbo.raiz] = word
+                    _this.verbos[verbo.raiz.indexOf('#') > -1 ? verbo.raiz.replaceAll('#',''):verbo.raiz] =   word
+                    
                 })
             } catch (err) {
 
@@ -59,7 +60,7 @@ class Sintaxis {
         return {
             morfologico: function (opts) {
                 return {
-                    lang: this.lang,
+                    lang: analizer.lang,
                     Original: text,
                     morfologia: text.normalizer().morfologia(analizer,opts)
                 }
@@ -149,10 +150,10 @@ class Sintaxis {
                     return { type: data.type, mode: data.mode }
                 },
                 Verbos: function (word) {
-                    if (_this.verbos[word.stem('es')] && _this.verbos[word.stem('es')]) {
-                        const letra = word.substr(0, 1).toUpperCase()
-                        const verbo = JSON.parse(fs.readFileSync(path.resolve(__dirname, './diccionary/Verbos/' + letra + '.json')))[_this.verbos[word.stem('es')]]
-                        return word.isVerbo(verbo)
+                    if (_this.verbos[word.stem('es')]) {
+                        const letra = _this.verbos[word.stem('es')].substr(0, 1).toUpperCase()
+                        const verbo = JSON.parse(fs.readFileSync(path.resolve(__dirname, './diccionary/Verbos/' + letra + '.json')))
+                        return word.isVerbo(verbo[_this.verbos[word.stem('es')]])
                     } else {
                         return null
                     }
@@ -199,25 +200,7 @@ class Sintaxis {
             }
         }
     }
-    back() {
-        var normalizer = null;
-        var tokenizer = null;
-        var stopwords = null;
-        var stemmer = null;
-
-        if (lang == 'es') {
-            normalizer = new NormalizerEs();
-            tokenizer = new TokenizerEs();
-            stopwords = new StopwordsEs();
-            stemmer = new StemmerEs();
-        }
-        return {
-            normalizer: normalizer,
-            tokenizer: tokenizer,
-            stopwords: stopwords,
-            stemmer: stemmer
-        }
-    }
+    
 }
 
 module.exports = Sintaxis

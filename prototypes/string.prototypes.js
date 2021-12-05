@@ -1,7 +1,7 @@
 module.exports = function (lang,extendArrays) {
 
     const _ = require('lodash')
-    const { StemmerEs, StopwordsEs, TokenizerEs, NormalizerEs } = require('@nlpjs/lang-es');
+    const { StemmerEs, TokenizerEs, NormalizerEs } = require('@nlpjs/lang-es');
 
     if (extendArrays)
         require('./arrays.prototypes.js')(lang,_);
@@ -12,7 +12,6 @@ module.exports = function (lang,extendArrays) {
             return {
                 normalizer: new NormalizerEs(),
                 tokenizer: new TokenizerEs,
-                stopwords: new StopwordsEs(),
                 stemmer: new StemmerEs()
             }
         } else {
@@ -152,11 +151,12 @@ module.exports = function (lang,extendArrays) {
         }
         var _resp = null
         _.each(verbo.tiempos, function (sufijos, tiempo ) {
+            const _raiz = verbo.raiz.indexOf('#') > -1 ? verbo.raiz.substr(0, verbo.raiz.indexOf('#')) : verbo.raiz
             if (!_.isArray(sufijos)) {
-                _resp = _test(_word, verbo.raiz, sufijos, tiempo, _resp)
+                _resp = _test(_word, _raiz, sufijos, tiempo, _resp)
             } else {
                 _.each(sufijos, function (sufijo, n ) {
-                    _resp = _test(_word, verbo.raiz, sufijo, tiempo, _resp, n)
+                    _resp = _test(_word, _raiz, sufijo, tiempo, _resp, n)
                 })
             }
         })

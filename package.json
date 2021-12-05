@@ -1,8 +1,8 @@
 {
   "name": "syntax-es.js",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "private": false,
-  "description": "Analizador sintáctico castellano",
+  "description": "Analizador morfológico castellano",
   "license": "MIT",
   "repository": "Softman65/Syntax-es.js",
   "author": {
