@@ -18,6 +18,7 @@
     "index.js",
     "prototypes/arrays.prototypes.js",
     "prototypes/string.prototypes.js",
+    "diccionary/Adverbios.json",
     "diccionary/Articulos.json",
     "diccionary/Conjunciones.json",
     "diccionary/Preposiciones.json",
